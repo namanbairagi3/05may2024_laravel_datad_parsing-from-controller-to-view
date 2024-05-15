@@ -2,22 +2,43 @@
 
 use App\Http\Controllers\AnilController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\NmnController;
+
+use App\Http\Controllers\MobileController;
+use App\Http\Controllers\TeacherController;
+use App\Http\Controllers\GameController;
+use App\Http\Controllers\CricketPlayerController;
+use App\Http\Controllers\AnimalController;
+use App\Http\Controllers\LaptopController;
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\NewsController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
 
+ 
 
 
 
-Route::get('/nmn', [NmnController::class, 'show']);
+//ClassName::method(ActualArg1,ActualArg2)
+//ClassName::method('string',cbfn) Callback function
+// Route::get('/abhi1', function () {
+//     $data = ['myname'=>'Abhishek','mysurname'=>'Bairagi']; // Associative Array ['key'=>'value']
+//     return view('abhi1',$data);
+// });
+
+
+
+
+
+
+
+//Route::get('/nmn', [NmnController::class, 'show']);
 
 //Route::get('/anil123','ControllerName@MethodName')
 Route::get('/anil123', [AnilController::class, 'show']);
 //Route::get('/anil123','AnilController@show');
-
 
 Route::get('/naman', function () {
     return view('naman');
@@ -36,9 +57,7 @@ Route::get('/naman1', function () {
 
 
 
-// Route::get('/naman1', function () {
-//     return view('naman1');
-// });
+
 
 Route::get('/naman2', function () {
     return view('naman2');
@@ -118,3 +137,26 @@ Route::get('/mobno', function () {
     return view('mob.no.mobno',$mobNo);
 });
 
+
+
+//mp/neemuch
+// /mp/manasa
+
+Route::prefix('mp')->group(function(){
+    Route::get('/neemuch', function () { // /mp/neemuch
+        return "Hello From Neemuch";
+    });
+    Route::get('/manasa', function () { // /mp/manasa
+        return "Hello From Manasa";
+    });
+});
+
+Route::get('/mymobiles',[MobileController::class,'index']);
+Route::get('/teacher',[TeacherController::class,'index']);
+Route::get('/game',[GameController::class,'index']);
+Route::get('/cricket',[CricketPlayerController::class,'index']);
+Route::get('/animals',[AnimalController::class,'index']);
+//Route::get('/laptops',[LaptopController::class,'index']);
+Route::resource('laptops', LaptopController::class);
+Route::resource('posts', PostController::class);
+Route::resource('news', NewsController::class);
