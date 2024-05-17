@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\News;
 use Illuminate\Http\Request;
+use App\Models\News;
 
 class NewsController extends Controller
 {
@@ -12,27 +12,37 @@ class NewsController extends Controller
      */
     public function index()
     {
-        //I wnnt to perform reat operation
+        //I want to perform Read Operation
+        //1. QueryBuilder
 
-        //eliquet ORM (object relational mapper)
-        $news = News::all();
+        //2. Eleqoent ORM (Object Relatinal Mapper)
+        $news = News::orderBy('created_at', 'desc')->get();
+
         return view('news.index',compact('news'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the add form for creating a new resource.
      */
     public function create()
     {
-        return view('news.create'); //
+        //
+
+        return view('news.create');
+
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource/data in storage = Database.
      */
     public function store(Request $request)
     {
-        return 'store method';  //
+        //dd($request->all());
+        // I want to insert record
+        //1. QueryBuilder
+        //2. Eleqoent ORM (Object Relatinal Mapper)
+        News::create($request->all()); //Create method is used for inserting single record
+        return redirect()->route('news.create')->with('success','Post created successfully.');;
     }
 
     /**
@@ -44,11 +54,16 @@ class NewsController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the edit form for editing the specified resource.
      */
     public function edit(News $news)
     {
-        //
+        
+        // READ operation
+        //Equoquent 
+        $news = News::find($news->id);
+        //dd($news->title);
+        return view('news.edit',compact('news'));
     }
 
     /**
@@ -56,7 +71,10 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        //
+        //dd($news->id);
+        //I want to update the record using Eleqouent
+        News::where('id', $news->id)->update($request->only(['title', 'description', 'image_url']));
+        return redirect()->route('news.index')->with('success', 'News updated successfully.');
     }
 
     /**
