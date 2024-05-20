@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;    
 use Illuminate\Http\Request;
-use App\Models\News;
 
 class NewsController extends Controller
 {
@@ -50,7 +50,7 @@ class NewsController extends Controller
      */
     public function show(News $news)
     {
-        //
+       return 'show'; //
     }
 
     /**
@@ -83,5 +83,7 @@ class NewsController extends Controller
     public function destroy(News $news)
     {
         //
+        News::where('id', $news->id)->delete();                            
+        return redirect()->route('news.index')->with('success', 'News deleted successfully.');
     }
 }

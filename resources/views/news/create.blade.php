@@ -5,6 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>News</title>
     </head>
+    @if(session('success'))
+            <div class="alert alert-success">
+                {{ session('success') }}
+            </div>
+        @endif  
     <body>
         <h1>Add News  FORM</h1>
         <form method="POST" action="/news">

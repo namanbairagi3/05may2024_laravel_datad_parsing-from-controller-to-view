@@ -33,3 +33,7 @@ class NewsSeeder extends Seeder
         ]);
     }
 }
+
+
+
+

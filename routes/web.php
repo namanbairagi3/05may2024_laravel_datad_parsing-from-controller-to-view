@@ -11,6 +11,9 @@ use App\Http\Controllers\AnimalController;
 use App\Http\Controllers\LaptopController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\NewsController;
+//use App\Http\Controllers\ProductSeeder;
+use App\Http\Controllers\ProductController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -160,3 +163,4 @@ Route::get('/animals',[AnimalController::class,'index']);
 Route::resource('laptops', LaptopController::class);
 Route::resource('posts', PostController::class);
 Route::resource('news', NewsController::class);
+Route::resource('products', ProductController::class);
